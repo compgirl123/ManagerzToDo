@@ -38,7 +38,6 @@ server.post("/register", (req, res) => {
 });
 
 server.get("/games", (req, res) => {
-
     let sql = "SELECT * FROM games";
     db.query(sql, (err,result) =>{
         if (err) {
@@ -56,7 +55,7 @@ server.put("/edit", (req, res) => {
     const { cost } = req.body;
     const { category } = req.body;
 
-    let sql = "UPDATE games SET name = ?, cost = ?, category = ? WHERE idgames = ?";
+    let sql = "UPDATE games SET name = ?, cost = ?, category = ? WHERE id = ?";
     db.query(sql, [name, cost, category, id], (err,result) =>{
         if (err) {
             console.log(err);
@@ -70,7 +69,7 @@ server.put("/edit", (req, res) => {
 server.delete("/delete/:index", (req,res) =>{
     const { index } = req.params
 
-    let sql = "DELETE FROM games WHERE idgames = ?"
+    let sql = "DELETE FROM games WHERE id = ?"
     db.query(sql, [index], (err,result) =>{err ? console.log(err) : res.send(result)})
 })
 server.listen(3001, () =>

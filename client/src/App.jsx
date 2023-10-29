@@ -40,11 +40,9 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-          <h1 className="title">Game Shop</h1>
-          <h3>Add a Game</h3>
+          <h1 className="title">Manager's To Do's</h1>
           <div className="register-box">
               <input className="register-input" type="text" name="name" placeholder="Title" onChange={handleChangeValues} />
-              <input className="register-input" type="text" name="cost" placeholder="Cost" onChange={handleChangeValues} />
               <input className="register-input" type="text" name="category" placeholder="Category" onChange={handleChangeValues} />
               <button className="register-button" onClick={handleClickButton}>Add</button>
           </div>
@@ -53,13 +51,12 @@ function App() {
               {typeof games !== 'undefined' &&
                   games.map((game) => {
                       return <Card
-                          key={game.idgames}
-                          id={game.idgames}
+                          key={game.id}
+                          id={game.id}
                           name={game.name}
                           cost={game.cost}
                           category={game.category}
-
-                      >
+                          >
                       </Card>;
                   })}
           </div>

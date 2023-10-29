@@ -8,13 +8,15 @@ const Card = (props) => {
     const [open, setOpen] = React.useState(false);
 
     const cardOpen = () => {
-        setOpen(true)
+        console.log(props);
+        setOpen(true);
     }
     const handleClose = () => {
         setOpen(false);
     };
 
     const handleDeleteGame = () => {
+        console.log(props);
         axios.delete(`http://localhost:3001/delete/${props.id}`);
     }
 
@@ -24,7 +26,6 @@ const Card = (props) => {
         <div className="game-card">
             <div className="info">
                 <h4>{props.name}</h4>
-                <p>${props.cost}</p>
                 <p>{props.category}</p>
             </div>
             <div className="actions">

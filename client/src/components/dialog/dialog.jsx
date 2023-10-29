@@ -12,7 +12,6 @@ export default function FormDialog(props) {
     const [editValues, setEditValues] = useState({
         id: props.id,
         name: props.name,
-        cost: props.cost,
         category: props.category,
     });
 
@@ -23,7 +22,6 @@ export default function FormDialog(props) {
         axios.put(`https://managerztododb.onrender.com/edit`, {
             id: editValues.id,
             name: editValues.name,
-            cost: editValues.cost,
             category: editValues.category,
         });
         handleClose();
@@ -53,7 +51,6 @@ export default function FormDialog(props) {
 
     return (
         <div>
-
             <Dialog open={props.open} onClose={handleClose}>
                 <DialogTitle>Edit</DialogTitle>
                 <DialogContent>
@@ -63,17 +60,6 @@ export default function FormDialog(props) {
                         id="name"
                         label="Title"
                         defaultValue={props.name}
-                        type="text"
-                        onChange={handleChangeValues}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="cost"
-                        label="Cost"
-                        defaultValue={props.cost}
                         type="text"
                         onChange={handleChangeValues}
                         fullWidth
