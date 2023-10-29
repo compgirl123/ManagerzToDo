@@ -9,7 +9,7 @@ function App() {
     const baseUrl = "https://managerztododb.onrender.com"
 
     const [values, setValues] = useState();
-    const [games, setGames] = useState();
+    const [games, setGames] = useState([]);
 
     const handleChangeValues = (value) => {
         setValues((prevValue) => ({
@@ -21,20 +21,20 @@ function App() {
     const handleClickButton = () => {
         Axios.post(`${baseUrl}/register`, {
             name: values.name,
-            cost: values.cost,
             category: values.category,
         }).then((response) =>{
             console.log(response)
+            setGames([...games,response.data]);
         });
     }
 
+
     useEffect(() => {
-        Axios.get(`${baseUrl}/games`)
-            .then((response)=>{
-            setGames(response.data)
-        })
-        }
-    )
+      Axios.get(`${baseUrl}/games`)
+          .then((response) => {
+              setGames(response.data);
+          });
+    }, [games]); // Empty dependency array to run the effect only once
 
 
   return (
@@ -54,7 +54,6 @@ function App() {
                           key={game.id}
                           id={game.id}
                           name={game.name}
-                          cost={game.cost}
                           category={game.category}
                           >
                       </Card>;

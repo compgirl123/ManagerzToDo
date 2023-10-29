@@ -15,8 +15,8 @@ const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  connectionLimit: 10
+  database: process.env.DB_DATABASE
+  //connectionLimit: 10
 })
 
 server.use(express.json());
@@ -24,11 +24,10 @@ server.use(cors());
 
 server.post("/register", (req, res) => {
     const { name } = req.body;
-    const { cost } = req.body;
     const { category } = req.body;
 
-    let sql = "INSERT INTO games (name, cost, category) VALUES (?,?,?)"
-    db.query(sql, [name, cost, category], (err,result) =>{
+    let sql = "INSERT INTO games (name, category) VALUES (?,?)"
+    db.query(sql, [name, category], (err,result) =>{
         if (err) {
             console.log(err);
         }else{
@@ -45,18 +44,16 @@ server.get("/games", (req, res) => {
         }else{
             res.send(result);
         }
-
     })
 });
 
-server.put("/edit", (req, res) => {
+/*server.put("/edit", (req, res) => {
     const { id } = req.body;
     const { name } = req.body;
-    const { cost } = req.body;
     const { category } = req.body;
 
-    let sql = "UPDATE games SET name = ?, cost = ?, category = ? WHERE id = ?";
-    db.query(sql, [name, cost, category, id], (err,result) =>{
+    let sql = "UPDATE games SET name = ?, category = ? WHERE id = ?";
+    db.query(sql, [name, category, id], (err,result) =>{
         if (err) {
             console.log(err);
         }else{
@@ -64,7 +61,7 @@ server.put("/edit", (req, res) => {
             res.send(result);
         }
     })
-});
+});*/
 
 server.delete("/delete/:index", (req,res) =>{
     const { index } = req.params

@@ -4,6 +4,8 @@
 }
 body{
   font-family: Montserrat, sans-serif;
+  background-color: black;
+  color: white;
 }
 .container{
   margin-inline: auto;
