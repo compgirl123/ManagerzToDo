@@ -19,7 +19,8 @@ export default function FormDialog(props) {
 
     const handleEditValues = () => {
         console.log(props.baseUrl)
-        axios.put(`http://localhost:3001/edit`, {
+       // axios.put(`http://localhost:3001/edit`, {
+        axios.put(`https://managerztododb.onrender.com/edit`, {
             id: editValues.id,
             name: editValues.name,
             cost: editValues.cost,
@@ -30,7 +31,8 @@ export default function FormDialog(props) {
     }
 
     const handleDeleteGame = () => {
-        axios.delete(`http://localhost:3001/delete/${editValues.id}`)
+        axios.delete(`https://managerztododb.onrender.com/delete/${editValues.id}`)
+        //axios.delete(`http://localhost:3001/delete/${editValues.id}`)
     }
 
     const handleChangeValues = (value)=>{
