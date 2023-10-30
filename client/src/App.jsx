@@ -6,13 +6,14 @@ import Card from "./components/card";
 function App() {
   const baseUrl = "https://managerztododb.onrender.com";
 
+  //const baseUrl = "localhost:3001";
   const [values, setValues] = useState({ name: '', category: '' });
   const [games, setGames] = useState([]);
 
   // useEffect to load data initially and when values.name or values.category change
   useEffect(() => {
     fetchGames();
-  }, [games]);
+  }, []);
 
   const fetchGames = () => {
     Axios.get(`${baseUrl}/games`, {
@@ -35,7 +36,8 @@ function App() {
       name: values.name,
       category: values.category,
     }).then((response) => {
-      setGames([...games, response.data]); // Update the local state with the new entry
+      //setGames([...games, response.data]); // Update the local state with the new entry
+      fetchGames();
     });
   }
 
