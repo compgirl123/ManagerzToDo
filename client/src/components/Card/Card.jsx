@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import "./card.css"
+import "./Card.css"
 import FormDialog from "../dialog/dialog";
 import axios from "axios";
 
