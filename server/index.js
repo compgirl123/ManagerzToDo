@@ -30,9 +30,11 @@ server.use((req, res, next) => {
   next();
 });
 
-server.post("/register", (req, res) => {
+server.post("/add", (req, res) => {
     const { name } = req.body;
     const { category } = req.body;
+
+    alert("MILFLEEN");
 
     let sql = "INSERT INTO games (name, category) VALUES (?,?)"
     db.query(sql, [name, category], (err,result) =>{
@@ -53,6 +55,25 @@ server.get("/games", (req, res) => {
             res.send(result);
         }
     })
+});
+
+server.post('/login', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const sql = "SELECT * from users WHERE email = ? AND password = ?";
+
+  db.query(sql, [email, password], (err, results) => {
+    if (err) {
+      console.error('Database Error:', err);
+      return res.status(500).json({ error: 'An error occurred while processing your request.' });
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Login Failed' });
+    }
+    return res.json({ success: 'Login Successful', user: results[0] });
+  });
 });
 
 /*server.put("/edit", (req, res) => {

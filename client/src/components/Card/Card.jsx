@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import "./card.css"
-import FormDialog from "./dialog/dialog";
+import FormDialog from "../dialog/dialog";
 import axios from "axios";
 
 
@@ -16,9 +16,9 @@ const Card = (props) => {
     };
 
     const handleDeleteGame = () => {
-        console.log(props);
-        //axios.delete(`http://localhost:3001/delete/${props.id}`);
-        axios.delete(`https://managerztododb.onrender.com/delete/${props.id}`);
+        axios.delete(`https://managerztododb.onrender.com/delete/${props.id}`).then(() => {
+          props.onDeleteGame(); // Call the callback to update the state in Dashboard.js
+        });
     }
 
     return (
