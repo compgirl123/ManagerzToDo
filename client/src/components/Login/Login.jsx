@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import Axios from "axios"
 
 const Login = ({ setIsAuthenticated }) => {
-  const adminEmail = 'admin@example.com';
-  const adminPassword = 'qwerty';
-
-  const [email, setEmail] = useState('admin@example.com');
-  const [password, setPassword] = useState('qwerty');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = e => {
     e.preventDefault();
-
-    if (email === adminEmail && password === adminPassword) {
+    const userCredentials = { email, password };
+    Axios.post(`https://managerztododb.onrender.com/login`, {
+    //Axios.post(`http://localhost:3001/login`, {
+       email: userCredentials.email,
+       password: userCredentials.password
+    }).then((response) => {
       Swal.fire({
         timer: 1500,
         showConfirmButton: false,
@@ -30,7 +32,9 @@ const Login = ({ setIsAuthenticated }) => {
           });
         },
       });
-    } else {
+    }).catch((error) => {
+      console.error('Network error:', error);
+      console.log(userCredentials);
       Swal.fire({
         timer: 1500,
         showConfirmButton: false,
@@ -46,7 +50,7 @@ const Login = ({ setIsAuthenticated }) => {
           });
         },
       });
-    }
+    });
   };
 
   return (

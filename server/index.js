@@ -47,13 +47,18 @@ server.get("/games", (req, res) => {
     })
 });
 
-server.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+server.post("/login", (req, res) => {
+  /*const email = req.body.email;
+  const password = req.body.password;*/
+
+  const { email, password } = req.body;
+
+  console.log("OTTTTTT");
 
   const sql = "SELECT * from users WHERE email = ? AND password = ?";
 
   db.query(sql, [email, password], (err, results) => {
+    console.log(results);
     if (err) {
       console.error('Database Error:', err);
       return res.status(500).json({ error: 'An error occurred while processing your request.' });
@@ -92,12 +97,3 @@ server.listen(3001, () =>
     console.log("Running in the port 3001")
 );
 
-server.get('/running-queries', (req, res) => {
-  db.query('SHOW PROCESSLIST', (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Unable to fetch running queries' });
-    }
-    res.json(results);
-  });
-});
