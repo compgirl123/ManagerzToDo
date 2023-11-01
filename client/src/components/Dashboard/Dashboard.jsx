@@ -7,6 +7,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [values, setValues] = useState({ name: '', category: '' });
   const [games, setGames] = useState([]);
   const baseUrl = "https://managerztododb.onrender.com";
+  //const baseUrl = "http://localhost:3001";
 
   // useEffect to load data initially and when values.name or values.category change
   useEffect(() => {
@@ -38,19 +39,21 @@ const Dashboard = ({ setIsAuthenticated }) => {
       alert('Button clicked');
     }).catch((error) => {
       console.error('Network error:', error);
+      console.log(values.name);
     });
 }
 
   /*const handleClickButton = () => {
     setValues({ name: '', category: '' });
-    Axios.post(`${baseUrl}/register`, {
+    Axios.post(`${baseUrl}/add`, {
       name: values.name,
       category: values.category,
     }).then((response) => {
       //setGames([...games, response.data]); // Update the local state with the new entry
       fetchGames();
     });
-  }*/
+  }
+  */
 
   return (
     <div className="App">

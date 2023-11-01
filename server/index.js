@@ -22,28 +22,18 @@ const db = mysql.createPool({
 server.use(express.json());
 server.use(cors());
 
-let queryCount = 0; // Initialize the query count
-
-// Middleware to increment the query count
-server.use((req, res, next) => {
-  queryCount += 1; // Increment the query count for every request
-  next();
-});
 
 server.post("/add", (req, res) => {
-    const { name } = req.body;
-    const { category } = req.body;
-
-    alert("MILFLEEN");
-
-    let sql = "INSERT INTO games (name, category) VALUES (?,?)"
-    db.query(sql, [name, category], (err,result) =>{
-        if (err) {
-            console.log(err);
-        }else{
-            console.log(result);
-        }
-    })
+  try {
+    const { name, category } = req.body;
+    const sql = "INSERT INTO games (name, category) VALUES (?,?)";
+    const result = db.query(sql, [name, category]);
+    console.log(result);
+    res.status(200).send("Game added successfully");
+} catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+}
 });
 
 server.get("/games", (req, res) => {
@@ -110,8 +100,4 @@ server.get('/running-queries', (req, res) => {
     }
     res.json(results);
   });
-});
-
-server.get('/query-count', (req, res) => {
-  res.json({ queryCount });
 });
