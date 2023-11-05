@@ -67,7 +67,7 @@ const Login = ({ setIsAuthenticated }) => {
               onChange={e => setEmail(e.target.value)}
             />
           </div>
-          <div class="input-group">
+          <div className="input-group">
             <label htmlFor="password">Password</label>
             <input
               id="password"
