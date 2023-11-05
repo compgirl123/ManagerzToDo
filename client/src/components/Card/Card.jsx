@@ -1,29 +1,28 @@
-import React, { useState} from "react";
+import React from "react";
 import "./Card.css"
-import FormDialog from "../dialog/dialog";
+//import FormDialog from "../dialog/dialog";
 import axios from "axios";
-
 
 const Card = (props) => {
     const [open, setOpen] = React.useState(false);
 
-    const cardOpen = () => {
+    /*const cardOpen = () => {
         console.log(props);
         setOpen(true);
     }
     const handleClose = () => {
         setOpen(false);
-    };
+    };*/
 
     const handleDeleteGame = () => {
         axios.delete(`https://managerztododb.onrender.com/delete/${props.id}`).then(() => {
-          props.onDeleteGame(); // Call the callback to update the state in Dashboard.js
+          props.onDeleteTask();
         });
     }
 
     return (
         <>
-        <FormDialog open={open} setOpen={setOpen} id={props.id} name={props.name} category={props.category} />
+        {/*<FormDialog open={open} setOpen={setOpen} id={props.id} name={props.name} category={props.category} />*/}
         <div className="game-card">
             <div className="info">
                 <h4>{props.name}</h4>

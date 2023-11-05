@@ -5,21 +5,18 @@ import Header from "./Header";
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const [values, setValues] = useState({ name: '', category: '' });
-  const [games, setGames] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const baseUrl = "https://managerztododb.onrender.com";
-  //const baseUrl = "http://localhost:3001";
 
-  // useEffect to load data initially and when values.name or values.category change
   useEffect(() => {
-    fetchGames();
+    fetchTasks();
   }, []);
 
-  const fetchGames = () => {
-    console.log('Fetching games...'); // Add this line
+  const fetchTasks = () => {
     Axios.get(`${baseUrl}/games`, {
       params: { name: values.name, category: values.category }
     }).then((response) => {
-      setGames(response.data);
+      setTasks(response.data);
     });
   }
 
@@ -35,25 +32,12 @@ const Dashboard = ({ setIsAuthenticated }) => {
       name: values.name,
       category: values.category
     }).then((response) => {
-      fetchGames();
-      alert('Button clicked');
+      fetchTasks();
     }).catch((error) => {
       console.error('Network error:', error);
       console.log(values.name);
     });
 }
-
-  /*const handleClickButton = () => {
-    setValues({ name: '', category: '' });
-    Axios.post(`${baseUrl}/add`, {
-      name: values.name,
-      category: values.category,
-    }).then((response) => {
-      //setGames([...games, response.data]); // Update the local state with the new entry
-      fetchGames();
-    });
-  }
-  */
 
   return (
     <div className="App">
@@ -67,13 +51,13 @@ const Dashboard = ({ setIsAuthenticated }) => {
       </div>
       <br />
       <div className="cards">
-        {games.map((game) => (
+        {tasks.map((task) => (
           <Card
-            key={game.id}
-            id={game.id}
-            name={game.name}
-            category={game.category}
-            onDeleteGame={fetchGames} // Pass the callback function
+            key={task.id}
+            id={task.id}
+            name={task.name}
+            category={task.category}
+            onDeleteTask={fetchTasks}
           />
         ))}
       </div>

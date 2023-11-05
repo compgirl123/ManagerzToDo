@@ -19,7 +19,6 @@ const Logout = ({ setIsAuthenticated }) => {
           },
           willClose: () => {
             localStorage.setItem('is_authenticated', false);
-            alert(setIsAuthenticated);
             setIsAuthenticated(false);
             console.log(localStorage.getItem('is_authenticated'));
           },
