@@ -12,7 +12,7 @@ const Logout = ({ setIsAuthenticated }) => {
     }).then(result => {
       if (result.value) {
         Swal.fire({
-          timer: 1500,
+          timer: 500,
           showConfirmButton: false,
           willOpen: () => {
             Swal.showLoading();

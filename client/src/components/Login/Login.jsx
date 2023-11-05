@@ -14,8 +14,8 @@ const Login = ({ setIsAuthenticated }) => {
        email: userCredentials.email,
        password: userCredentials.password
     }).then((response) => {
-      Swal.fire({
-        timer: 1500,
+    Swal.fire({
+        timer: 500,
         showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
@@ -33,14 +33,14 @@ const Login = ({ setIsAuthenticated }) => {
     }).catch((error) => {
       console.error('Network error:', error);
       Swal.fire({
-        timer: 1500,
+        timer: 500,
         showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
         },
         willClose: () => {
           Swal.fire({
-            timer: 1500,
+            timer: 500,
             icon: 'error',
             title: 'Error!',
             text: 'Incorrect email or password.',
