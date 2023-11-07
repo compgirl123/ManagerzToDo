@@ -4,16 +4,14 @@
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
-    border-style: solid;
     border-radius: 8px;
-    border-width: 1px;
-    background-color:burlywood;
+    background-color:#B19CD9;
     font-size: 1.25rem;
 }
 
 .info{
   text-align: right;
-  color: darkslategray;
+  color: darkpurple;
 }
 
 .actions button{
@@ -31,6 +29,6 @@
 }
 
 .delete{
-    background-color: crimson;
+    background-color: darkorchid;
     color: white;
 }
