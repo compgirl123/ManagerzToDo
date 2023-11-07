@@ -29,9 +29,10 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }
 
   const handleClickButton  = () => {
+    console.log(values.name);
     Axios.post(`${baseUrl}/add`, {
       name: values.name,
-      category: values.category
+      //category: values.category
     }).then((response) => {
       fetchTasks();
     }).catch((error) => {
@@ -45,8 +46,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
     <div className="container">
       <Header setIsAuthenticated={setIsAuthenticated}/>
       <div className="register-box">
-        <input className="register-input" type="text" name="name" placeholder="Title" value={values.name} onChange={handleChangeValues} />
-        <input className="register-input" type="text" name="category" placeholder="Category" value={values.category} onChange={handleChangeValues} />
+        <input className="register-input" type="text" name="name" placeholder="Add Task" value={values.name} onChange={handleChangeValues} />
+        {/*<input className="register-input" type="text" name="category" placeholder="Category" value={values.category} onChange={handleChangeValues} />*/}
         <button className="register-button" onClick={handleClickButton}>Add</button>
       </div>
       <br />

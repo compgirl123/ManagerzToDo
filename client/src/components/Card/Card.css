@@ -2,20 +2,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin-bottom: 10px;
     padding: 10px;
-
     border-style: solid;
     border-radius: 8px;
     border-width: 1px;
+    background-color:burlywood;
+    font-size: 1.25rem;
+}
+
+.info{
+  text-align: right;
+  color: darkslategray;
 }
 
 .actions button{
     height: 25px;
     margin-right: 5px;
     padding-inline: 10px;
-
     border-style: none;
     border-radius: 8px;
     border-color: lightslategrey;

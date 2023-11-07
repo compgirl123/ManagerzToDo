@@ -4,7 +4,6 @@
 }
 
 .full-screen{
-  background-color: darkslategray;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +12,7 @@
 }
 
 .small-container {
-  background-color: burlywood;
+  background-color: blueviolet;
   border-radius:20px;
   padding: 40px 30px;
   width: 80%;
@@ -38,7 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 8px;
+  padding: 10px;
 }
 
 .input-group label{
@@ -48,7 +47,7 @@
 
 .input-group input{
   font-size: 1rem;
-  padding: 0.5em;
+  padding: 1em;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -59,5 +58,7 @@
   font-size: 1rem;
   border: none;
   border-radius: 10px;
+  background-color: #B19CD9;
+  color: white;
   padding: 10px;
 }

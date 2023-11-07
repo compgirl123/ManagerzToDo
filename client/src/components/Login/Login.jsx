@@ -56,13 +56,13 @@ const Login = ({ setIsAuthenticated }) => {
       <div className="small-container">
       <h1 className="title-login">Admin Login</h1>
         <form onSubmit={handleLogin} className="form">
-          <div className="input-group success">
+          <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
               name="email"
-              placeholder="admin@example.com"
+              placeholder="Enter Email"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
@@ -73,12 +73,15 @@ const Login = ({ setIsAuthenticated }) => {
               id="password"
               type="password"
               name="password"
-              placeholder="qwerty"
+              placeholder="Enter Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
           </div>
+          <div className="input-group">
           <input style={{ marginTop: '12px' }} type="submit" value="Login" className="login-button" />
+          </div>
+
         </form>
       </div>
     </div>
