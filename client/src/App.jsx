@@ -17,12 +17,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+          <Route path="/" element={<Login setIsAuthenticated={isAuthenticated}/>} />
           <Route path="/signup" element={<SignUp />} />
           {isAuthenticated ? (
-            <Route element={<Dashboard setIsAuthenticated={setIsAuthenticated}/>} path="/dashboard"/>
+            <Route element={<Dashboard setIsAuthenticated={isAuthenticated}/>} path="/dashboard"/>
           ) : (
-            <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+            <Route path="/" element={<Login setIsAuthenticated={isAuthenticated}/>} />
           )}
         </Routes>
       </BrowserRouter>
