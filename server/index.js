@@ -4,13 +4,6 @@ const mysql = require('mysql');
 const cors = require('cors');
 require('dotenv').config({ path: '../.env' })
 
-/*const db = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "nailton123",
-    database: "crudgames",
-});*/
-
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -48,9 +41,6 @@ server.get("/games", (req, res) => {
 });
 
 server.post("/login", (req, res) => {
-  /*const email = req.body.email;
-  const password = req.body.password;*/
-
   const { email, password } = req.body;
 
   const sql = "SELECT * from users WHERE email = ? AND password = ?";
@@ -70,10 +60,9 @@ server.post("/login", (req, res) => {
 });
 
 server.post("/signup", (req, res) => {
-  /*const email = req.body.email;
-  const password = req.body.password;*/
   try {
     const { name, email, password } = req.body;
+    console.log("BANANAS");
     const sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
     const result = db.query(sql, [name, email, password]);
     console.log(result);

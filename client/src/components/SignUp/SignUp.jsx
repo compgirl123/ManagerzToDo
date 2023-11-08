@@ -16,6 +16,7 @@ const SignUp = ({ setIsAuthenticated }) => {
        email: userCredentials.email,
        password: userCredentials.password
     }).then((response) => {
+    console.log(response);
     Swal.fire({
         timer: 500,
         showConfirmButton: false,
@@ -25,7 +26,7 @@ const SignUp = ({ setIsAuthenticated }) => {
         willClose: () => {
           Swal.fire({
             icon: 'success',
-            title: 'Successfully logged in!',
+            title: 'Successfully signed up!',
             showConfirmButton: false
           });
         },
@@ -91,6 +92,7 @@ const SignUp = ({ setIsAuthenticated }) => {
           </div>
           <div className="input-group">
           <input style={{ marginTop: '12px' }} type="submit" value="Sign Up" className="SignUp-button" />
+          <p style={{textAlign:'center', marginTop: '5px'}}>Already have an account? <a href="/">Login Here</a></p>
           </div>
         </form>
       </div>

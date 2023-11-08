@@ -23,10 +23,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }
 
   const handleChangeValues = (value) => {
-    /*setValues(prevValue => ({
-      ...prevValue,
-      [value.target.name]: value.target.value,
-    }));*/
     setValues(({
       [value.target.name]: value.target.value,
     }));

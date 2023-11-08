@@ -3,6 +3,7 @@ import Logout from '../Logout/Logout';
 import "./Header.scss";
 
 const Header = ({ setIsAdding, setIsAuthenticated }) => {
+
   return (
     <header>
       <h1 className="managerHeader">Manager's To Do's</h1>

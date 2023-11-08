@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import Axios from "axios"
 import "./Login.scss";
@@ -6,6 +7,7 @@ import "./Login.scss";
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = e => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const Login = ({ setIsAuthenticated }) => {
             title: 'Successfully logged in!',
             showConfirmButton: false
           });
+          navigate("/dashboard");
         },
       });
     }).catch((error) => {
@@ -79,9 +82,9 @@ const Login = ({ setIsAuthenticated }) => {
             />
           </div>
           <div className="input-group">
-          <input style={{ marginTop: '12px' }} type="submit" value="Login" className="login-button" />
+            <input style={{ marginTop: '12px' }} type="submit" value="Login" className="login-button" />
+            <p style={{textAlign:'center', marginTop: '5px'}}>Don't have an account? <a href="/signup">Sign up Here</a></p>
           </div>
-
         </form>
       </div>
     </div>
