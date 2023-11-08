@@ -4,12 +4,12 @@ import Swal from 'sweetalert2';
 import Axios from "axios"
 import "./Login.scss";
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
     const userCredentials = { email, password };
     Axios.post(`https://managerztododb.onrender.com/login`, {
@@ -24,7 +24,7 @@ const Login = ({ setIsAuthenticated }) => {
         },
         willClose: () => {
           localStorage.setItem('is_authenticated', true);
-          setIsAuthenticated(true);
+          //setIsAuthenticated(true);
           Swal.fire({
             icon: 'success',
             title: 'Successfully logged in!',
