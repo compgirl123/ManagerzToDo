@@ -23,13 +23,17 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }
 
   const handleChangeValues = (value) => {
-    setValues(prevValue => ({
+    /*setValues(prevValue => ({
       ...prevValue,
+      [value.target.name]: value.target.value,
+    }));*/
+    setValues(({
       [value.target.name]: value.target.value,
     }));
   }
 
   const handleClickButton  = () => {
+
     if(values.name){
       Axios.post(`${baseUrl}/add`, {
         name: values.name,
@@ -39,6 +43,10 @@ const Dashboard = ({ setIsAuthenticated }) => {
       }).catch((error) => {
         console.error('Network error:', error);
         console.log(values.name);
+      });
+      setValues({
+        ...values,
+        name: '',
       });
     }
     else{
