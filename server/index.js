@@ -53,8 +53,6 @@ server.post("/login", (req, res) => {
 
   const { email, password } = req.body;
 
-  console.log("OTTTTTT");
-
   const sql = "SELECT * from users WHERE email = ? AND password = ?";
 
   db.query(sql, [email, password], (err, results) => {
@@ -69,6 +67,21 @@ server.post("/login", (req, res) => {
     }
     return res.json({ success: 'Login Successful', user: results[0] });
   });
+});
+
+server.post("/signup", (req, res) => {
+  /*const email = req.body.email;
+  const password = req.body.password;*/
+  try {
+    const { name, email, password } = req.body;
+    const sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
+    const result = db.query(sql, [name, email, password]);
+    console.log(result);
+    res.status(200).send("Game added successfully");
+} catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+}
 });
 
 /*server.put("/edit", (req, res) => {

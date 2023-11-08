@@ -3,6 +3,7 @@ import './App.css';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -16,7 +17,7 @@ function App() {
       {isAuthenticated ? (
         <Dashboard setIsAuthenticated={setIsAuthenticated} />
       ) : (
-        <Login setIsAuthenticated={setIsAuthenticated} />
+        <SignUp/>
       )}
       {console.log('Value of isAuthenticated: ' + isAuthenticated)}
     </>
