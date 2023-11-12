@@ -15,7 +15,6 @@ const db = mysql.createPool({
 server.use(express.json());
 server.use(cors());
 
-
 server.post("/add", (req, res) => {
   try {
     const { name, category } = req.body;
@@ -29,7 +28,7 @@ server.post("/add", (req, res) => {
 }
 });
 
-server.get("/games", (req, res) => {
+/*server.get("/games", (req, res) => {
     let sql = "SELECT * FROM games";
     db.query(sql, (err,result) =>{
         if (err) {
@@ -38,6 +37,35 @@ server.get("/games", (req, res) => {
             res.send(result);
         }
     })
+});*/
+
+server.post("/games", (req, res) => {
+  const { email, password } = req.body;
+  console.log("bananas");
+  // Authenticate user
+  const authSql = "SELECT * FROM users WHERE email = ? AND password = ?";
+  db.query(authSql, [email, password], (authErr, authResults) => {
+    if (authErr) {
+      console.error('Authentication Error:', authErr);
+      return res.status(500).json({ error: 'An error occurred during authentication.' });
+    }
+
+    if (authResults.length === 0) {
+      return res.status(401).json({ error: 'Authentication Failed' });
+    }
+
+    // If authentication is successful, proceed to fetch games
+    let gamesSql = "SELECT * FROM games";
+    db.query(gamesSql, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Internal server error while fetching games.' });
+      } else {
+        console.log(result);
+        return res.json(result);
+      }
+    });
+  });
 });
 
 server.post("/login", (req, res) => {

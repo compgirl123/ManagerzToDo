@@ -23,7 +23,7 @@ const Logout = (/*{ setIsAuthenticated }*/) => {
           willClose: () => {
             localStorage.setItem('is_authenticated', false);
             //setIsAuthenticated(false);
-            alert(localStorage.getItem('is_authenticated'));
+            //alert(localStorage.getItem('is_authenticated'));
             navigate("/");
           },
         });

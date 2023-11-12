@@ -7,11 +7,13 @@ import "./Login.scss";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userCredentials, setUserCredentials] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const userCredentials = { email, password };
+    setUserCredentials(userCredentials);
     Axios.post(`https://managerztododb.onrender.com/login`, {
        email: userCredentials.email,
        password: userCredentials.password
@@ -30,7 +32,7 @@ const Login = () => {
             title: 'Successfully logged in!',
             showConfirmButton: false
           });
-          navigate("/dashboard");
+          navigate("/dashboard", { state: { userCredentials } });
         },
       });
     }).catch((error) => {

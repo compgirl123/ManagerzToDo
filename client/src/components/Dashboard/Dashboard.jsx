@@ -3,24 +3,54 @@ import Axios from "axios";
 import Card from "../Card/Card";
 import Header from "./Header";
 import "./Dashboard.scss";
+import { useLocation } from 'react-router-dom';
 
 const Dashboard = ({ setIsAuthenticated }) => {
+  const location = useLocation();
+  const { userCredentials } = location.state || {};
   const [values, setValues] = useState({ name: '', category: '' });
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState("");
   const baseUrl = "https://managerztododb.onrender.com";
 
+  /*useEffect(() => {
+    fetchTasks();
+  }, []);*/
+
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [userCredentials]);
 
   const fetchTasks = () => {
-    Axios.get(`${baseUrl}/games`, {
+    /*Axios.get(`${baseUrl}/games`, {
       params: { name: values.name, category: values.category }
     }).then((response) => {
       setTasks(response.data);
+    });*/
+    Axios.post(`${baseUrl}/games`, userCredentials, {
+      params: { name: values.name, category: values.category }
+    })
+    .then((response) => {
+      console.log(userCredentials);
+      setTasks(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching tasks:', error);
+      // Handle error as needed, e.g., set an error state
     });
   }
+
+  Axios.post(`${baseUrl}/games`, userCredentials, {
+    params: { name: values.name, category: values.category }
+  })
+  .then((response) => {
+    console.log(userCredentials);
+    setTasks(response.data);
+  })
+  .catch((error) => {
+    console.error('Error fetching tasks:', error);
+    // Handle error as needed, e.g., set an error state
+  });
 
   const handleChangeValues = (value) => {
     setValues(({
@@ -29,7 +59,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }
 
   const handleClickButton  = () => {
-
     if(values.name){
       Axios.post(`${baseUrl}/add`, {
         name: values.name,
