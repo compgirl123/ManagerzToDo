@@ -45,7 +45,8 @@ server.post("/todos", (req, res) => {
   // If authentication is successful, proceed to fetch todos
   let gamesSql = "SELECT * FROM todos";
   //let gamesSql = "SELECT * FROM todos WHERE user = (SELECT id FROM users WHERE email = ? AND password = ?)";
-  db.query(gamesSql, [email, password],  (err, result) => {
+  //db.query(gamesSql, [email, password],  (err, result) => {
+  db.query(gamesSql,  (err, result) => {
     alert("THEY")
     if (err) {
       console.log(err);
