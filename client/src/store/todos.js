@@ -6,7 +6,7 @@ export const fetchTodos = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       // Replace this line to fetch data from your server endpoint
-      const response = await fetch('https://managerztododb.onrender.com/todos');
+      const response = await fetch('https://managerztododb.onrender.com/to');
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.status}`);
       }

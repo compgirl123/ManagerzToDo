@@ -42,9 +42,22 @@ server.post("/add", (req, res) => {
 server.post("/todos", (req, res) => {
   const { email, password } = req.body;
   console.log("bananas");
+  // If authentication is successful, proceed to fetch todos
+  //let gamesSql = "SELECT * FROM todos";
+  let gamesSql = "SELECT * FROM todos WHERE user = (SELECT id FROM users WHERE email = ? AND password = ?)";
+  db.query(gamesSql, [email, password],  (err, result) => {
+    alert("THEY")
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'Internal server error while fetching todos.' });
+    } else {
+      console.log(result);
+      return res.json(result);
+    }
+  });
   // Authenticate user
-  const authSql = "SELECT * FROM users WHERE email = ? AND password = ?";
-  db.query(authSql, [email, password], (authErr, authResults) => {
+  //const authSql = "SELECT * FROM users WHERE email = ? AND password = ?";
+  /*db.query(authSql, [email, password], (authErr, authResults) => {
     if (authErr) {
       console.error('Authentication Error:', authErr);
       return res.status(500).json({ error: 'An error occurred during authentication.' });
@@ -65,7 +78,7 @@ server.post("/todos", (req, res) => {
         return res.json(result);
       }
     });
-  });
+  });*/
 });
 
 server.post("/login", (req, res) => {

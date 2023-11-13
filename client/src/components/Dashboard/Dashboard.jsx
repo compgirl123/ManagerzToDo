@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
   const { userCredentials } = location.state || {};
-  const [values, setValues] = useState({ name: '', category: '' });
+  const [values, setValues] = useState({ task: '', category: '' });
   const [editingIndex, setEditingIndex] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState("");
@@ -29,29 +29,17 @@ const Dashboard = ({ setIsAuthenticated }) => {
       setTasks(response.data);
     });*/
     Axios.post(`${baseUrl}/todos`, userCredentials, {
-      params: { name: values.name, category: values.category }
+      params: { name: values.task, category: values.category }
     })
     .then((response) => {
-      console.log(userCredentials);
       setTasks(response.data);
+      console.log(response.data);
     })
     .catch((error) => {
       console.error('Error fetching tasks:', error);
       // Handle error as needed, e.g., set an error state
     });
   }
-
-  Axios.post(`${baseUrl}/todos`, userCredentials, {
-    params: { name: values.name, category: values.category }
-  })
-  .then((response) => {
-    console.log(userCredentials);
-    setTasks(response.data);
-  })
-  .catch((error) => {
-    console.error('Error fetching tasks:', error);
-    // Handle error as needed, e.g., set an error state
-  });
 
   const handleChangeValues = (value) => {
     setValues(({
@@ -60,19 +48,19 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }
 
   const handleClickButton  = () => {
-    if(values.name){
+    if(values.task){
       Axios.post(`${baseUrl}/add`, {
-        name: values.name,
+        task: values.task,
         //category: values.category
       }).then((response) => {
         fetchTasks();
       }).catch((error) => {
         console.error('Network error:', error);
-        console.log(values.name);
+        console.log(values.task);
       });
       setValues({
         ...values,
-        name: '',
+        task: '',
       });
     }
     else{
@@ -96,7 +84,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
           <Card
             key={task.id}
             id={task.id}
-            name={task.name}
+            name={task.task}
             category={task.category}
             onDeleteTask={fetchTasks}
             //onEditTask =
