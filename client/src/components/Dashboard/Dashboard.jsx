@@ -44,7 +44,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleChangeValues = (value) => {
     setValues(({
-      [value.target.task]: value.target.value,
+      [value.target.name]: value.target.value,
     }));
   }
 

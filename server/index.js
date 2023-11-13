@@ -46,30 +46,6 @@ server.post("/todos", (req, res) => {
   let gamesSql = "SELECT * FROM todos";
   //let gamesSql = "SELECT * FROM todos WHERE user = (SELECT id FROM users WHERE email = ? AND password = ?)";
   //db.query(gamesSql, [email, password],  (err, result) => {
-  /*db.query(gamesSql,  (err, result) => {
-    alert("THEY")
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ error: 'Internal server error while fetching todos.' });
-    } else {
-      console.log(result);
-      return res.json(result);
-    }
-  });*/
-  // Authenticate user
-  //const authSql = "SELECT * FROM users WHERE email = ? AND password = ?";
-  db.query(authSql, [email, password], (authErr, authResults) => {
-    if (authErr) {
-      console.error('Authentication Error:', authErr);
-      return res.status(500).json({ error: 'An error occurred during authentication.' });
-    }
-
-    if (authResults.length === 0) {
-      return res.status(401).json({ error: 'Authentication Failed' });
-    }
-
-    // If authentication is successful, proceed to fetch todos
-    let gamesSql = "SELECT * FROM todos";
     db.query(gamesSql, (err, result) => {
       if (err) {
         console.log(err);
@@ -79,7 +55,6 @@ server.post("/todos", (req, res) => {
         return res.json(result);
       }
     });
-  });
 });
 
 server.post("/login", (req, res) => {
