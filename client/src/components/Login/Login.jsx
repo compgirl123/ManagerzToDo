@@ -36,6 +36,7 @@ const Login = () => {
         },
       });
     }).catch((error) => {
+      console.log("potatoes");
       console.error('Network error:', error);
       Swal.fire({
         timer: 500,

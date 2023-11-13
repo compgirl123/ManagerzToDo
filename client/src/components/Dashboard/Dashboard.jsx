@@ -28,9 +28,13 @@ const Dashboard = ({ setIsAuthenticated }) => {
     }).then((response) => {
       setTasks(response.data);
     });*/
-    Axios.post(`${baseUrl}/todos`, userCredentials, {
-      params: { name: values.task, category: values.category }
-    })
+    Axios.post(`${baseUrl}/todos`, {
+      params: {
+      email: userCredentials.email,
+      password: userCredentials.password,
+      name: values.task,
+      category: values.category,
+    }})
     .then((response) => {
       setTasks(response.data);
       console.log(response.data);
