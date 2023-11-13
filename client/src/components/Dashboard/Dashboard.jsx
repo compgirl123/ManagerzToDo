@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
   const { userCredentials } = location.state || {};
-  const [values, setValues] = useState({ task: '', category: '' });
+  const [values, setValues] = useState({task: ''});
   const [editingIndex, setEditingIndex] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState("");
@@ -29,12 +29,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
       setTasks(response.data);
     });*/
     Axios.post(`${baseUrl}/todos`, {
-      params: {
       email: userCredentials.email,
       password: userCredentials.password,
-      name: values.task,
-      category: values.category,
-    }})
+    })
     .then((response) => {
       setTasks(response.data);
       console.log(response.data);
@@ -47,7 +44,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleChangeValues = (value) => {
     setValues(({
-      [value.target.name]: value.target.value,
+      [value.target.task]: value.target.value,
     }));
   }
 
