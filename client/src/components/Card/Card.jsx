@@ -2,6 +2,8 @@ import React from "react";
 import "./Card.css"
 //import FormDialog from "../dialog/dialog";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPencil} from '@fortawesome/free-solid-svg-icons';
 
 const Card = (props) => {
     const [open, setOpen] = React.useState(false);
@@ -20,6 +22,10 @@ const Card = (props) => {
         });
     }
 
+    const handleEditGame = () => {
+        // add post to edit
+    }
+
     return (
         <>
         {/*<FormDialog open={open} setOpen={setOpen} id={props.id} name={props.name} category={props.category} />*/}
@@ -30,6 +36,7 @@ const Card = (props) => {
             </div>
             <div className="actions">
                 {/*<button className="edit" onClick={cardOpen}>Edit</button>*/}
+                <button className="edit" onClick={handleEditGame}>Edit</button>
                 <button className="delete" onClick={handleDeleteGame}>Delete</button>
             </div>
         </div>

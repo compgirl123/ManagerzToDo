@@ -18,7 +18,7 @@ server.use(cors());
 server.post("/add", (req, res) => {
   try {
     const { name, category } = req.body;
-    const sql = "INSERT INTO games (name, category) VALUES (?,?)";
+    const sql = "INSERT INTO todos (name, category) VALUES (?,?)";
     const result = db.query(sql, [name, category]);
     console.log(result);
     res.status(200).send("Game added successfully");
@@ -28,8 +28,8 @@ server.post("/add", (req, res) => {
 }
 });
 
-/*server.get("/games", (req, res) => {
-    let sql = "SELECT * FROM games";
+/*server.get("/todos", (req, res) => {
+    let sql = "SELECT * FROM todos";
     db.query(sql, (err,result) =>{
         if (err) {
             console.log(err);
@@ -39,7 +39,7 @@ server.post("/add", (req, res) => {
     })
 });*/
 
-server.post("/games", (req, res) => {
+server.post("/todos", (req, res) => {
   const { email, password } = req.body;
   console.log("bananas");
   // Authenticate user
@@ -54,12 +54,12 @@ server.post("/games", (req, res) => {
       return res.status(401).json({ error: 'Authentication Failed' });
     }
 
-    // If authentication is successful, proceed to fetch games
-    let gamesSql = "SELECT * FROM games";
+    // If authentication is successful, proceed to fetch todos
+    let gamesSql = "SELECT * FROM todos";
     db.query(gamesSql, (err, result) => {
       if (err) {
         console.log(err);
-        return res.status(500).json({ error: 'Internal server error while fetching games.' });
+        return res.status(500).json({ error: 'Internal server error while fetching todos.' });
       } else {
         console.log(result);
         return res.json(result);
@@ -106,7 +106,7 @@ server.post("/signup", (req, res) => {
     const { name } = req.body;
     const { category } = req.body;
 
-    let sql = "UPDATE games SET name = ?, category = ? WHERE id = ?";
+    let sql = "UPDATE todos SET name = ?, category = ? WHERE id = ?";
     db.query(sql, [name, category, id], (err,result) =>{
         if (err) {
             console.log(err);
@@ -120,7 +120,7 @@ server.post("/signup", (req, res) => {
 server.delete("/delete/:index", (req,res) =>{
     const { index } = req.params
 
-    let sql = "DELETE FROM games WHERE id = ?"
+    let sql = "DELETE FROM todos WHERE id = ?"
     db.query(sql, [index], (err,result) =>{err ? console.log(err) : res.send(result)})
 })
 server.listen(3001, () =>

@@ -9,6 +9,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
   const { userCredentials } = location.state || {};
   const [values, setValues] = useState({ name: '', category: '' });
+  const [editingIndex, setEditingIndex] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState("");
   const baseUrl = "https://managerztododb.onrender.com";
@@ -19,15 +20,15 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchTasks();
-  }, [userCredentials]);
+  }, []);
 
   const fetchTasks = () => {
-    /*Axios.get(`${baseUrl}/games`, {
+    /*Axios.get(`${baseUrl}/todos`, {
       params: { name: values.name, category: values.category }
     }).then((response) => {
       setTasks(response.data);
     });*/
-    Axios.post(`${baseUrl}/games`, userCredentials, {
+    Axios.post(`${baseUrl}/todos`, userCredentials, {
       params: { name: values.name, category: values.category }
     })
     .then((response) => {
@@ -40,7 +41,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
     });
   }
 
-  Axios.post(`${baseUrl}/games`, userCredentials, {
+  Axios.post(`${baseUrl}/todos`, userCredentials, {
     params: { name: values.name, category: values.category }
   })
   .then((response) => {
@@ -98,6 +99,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
             name={task.name}
             category={task.category}
             onDeleteTask={fetchTasks}
+            //onEditTask =
           />
         ))}
       </div>

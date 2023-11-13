@@ -5,7 +5,9 @@
     "frontend": "cd client && npm run dev"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "concurrently": "^8.2.2",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.18.0",
