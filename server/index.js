@@ -17,8 +17,10 @@ server.use(cors());
 
 server.post("/add", (req, res) => {
   try {
-    const { name } = req.body;
-    const sql = "INSERT INTO todos (name) VALUES (?)";
+    const { name, email, password } = req.body;
+    const getId = "SELECT id FROM users WHERE email = ? AND password = ?";
+    const userId = db.query(getId, [email,password]);
+    const sql = "INSERT INTO todos (name,user) VALUES (?,?)";
     const result = db.query(sql, [name]);
     console.log(result);
     res.status(200).send("Game added successfully");
@@ -28,25 +30,10 @@ server.post("/add", (req, res) => {
 }
 });
 
-/*server.get("/todos", (req, res) => {
-    let sql = "SELECT * FROM todos";
-    db.query(sql, (err,result) =>{
-        if (err) {
-            console.log(err);
-        }else{
-            res.send(result);
-        }
-    })
-});*/
-
 server.post("/todos", (req, res) => {
   const { email, password } = req.body;
-  console.log("bananas");
-  // If authentication is successful, proceed to fetch todos
-  //let gamesSql = "SELECT * FROM todos";
   let gamesSql = "SELECT * FROM todos WHERE user = (SELECT id FROM users WHERE email = ? AND password = ?)";
   db.query(gamesSql, [email, password],  (err, result) => {
-    //db.query(gamesSql, (err, result) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ error: 'Internal server error while fetching todos.' });
@@ -59,9 +46,7 @@ server.post("/todos", (req, res) => {
 
 server.post("/login", (req, res) => {
   const { email, password } = req.body;
-
   const sql = "SELECT * from users WHERE email = ? AND password = ?";
-
   db.query(sql, [email, password], (err, results) => {
     console.log(results);
     if (err) {
@@ -108,7 +93,6 @@ server.post("/signup", (req, res) => {
 
 server.delete("/delete/:index", (req,res) =>{
     const { index } = req.params
-
     let sql = "DELETE FROM todos WHERE id = ?"
     db.query(sql, [index], (err,result) =>{err ? console.log(err) : res.send(result)})
 })

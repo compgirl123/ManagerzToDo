@@ -27,7 +27,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
       })
       .catch((error) => {
         console.error('Error fetching tasks:', error);
-        // Handle error as needed, e.g., set an error state
       });
   };
 
@@ -39,10 +38,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
   };
 
   const handleClickButton = () => {
-    alert(values.name);
     if (values.name.trim()) {
       Axios.post(`${baseUrl}/add`, {
         name: values.name,
+        email: userCredentials.email,
+        password: userCredentials.password,
       })
         .then(() => {
           fetchTasks();
