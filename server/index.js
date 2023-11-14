@@ -17,8 +17,8 @@ server.use(cors());
 
 server.post("/add", (req, res) => {
 
-    const { name, email, password } = req.body;
-   // Step 1: Retrieve user ID
+const { name, email, password } = req.body;
+// Step 1: Retrieve user ID
 // Step 1: Retrieve user ID
 const getUserIdQuery = 'SELECT id FROM users WHERE email = ? AND password = ?';
 db.query(getUserIdQuery, [email, password], (err, userIdResult) => {
@@ -37,7 +37,6 @@ db.query(getUserIdQuery, [email, password], (err, userIdResult) => {
         console.error('Error adding todo:', err);
         return;
       }
-
       console.log('Todo added successfully');
     });
   } else {

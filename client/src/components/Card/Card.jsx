@@ -36,7 +36,7 @@ const Card = (props) => {
             </div>
             <div className="actions">
                 {/*<button className="edit" onClick={cardOpen}>Edit</button>*/}
-                <button className="edit" onClick={handleEditGame}>Edit</button>
+                {/*<button className="edit" onClick={handleEditGame}>Edit</button>*/}
                 <button className="delete" onClick={handleDeleteGame}>Delete</button>
             </div>
         </div>

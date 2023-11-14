@@ -46,7 +46,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       })
         .then(() => {
           fetchTasks();
-          setValues({ ...values, name: '' });
+          setValues(prevValues => ({ ...prevValues, name: '' }));
           setWarning('');
         })
         .catch((error) => {
