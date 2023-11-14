@@ -15,19 +15,28 @@ const db = mysql.createPool({
 server.use(express.json());
 server.use(cors());
 
-server.post("/add", (req, res) => {
+server.post("/add", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const getId = "SELECT id FROM users WHERE email = ? AND password = ?";
-    const userId = db.query(getId, [email,password]);
-    const sql = "INSERT INTO todos (name,user) VALUES (?,?)";
-    const result = db.query(sql, [name,userId]);
-    console.log(result);
-    res.status(200).send("Game added successfully");
-} catch (error) {
+
+    // Retrieve user id
+    const getIdQuery = "SELECT id FROM users WHERE email = ? AND password = ?";
+    const userIdRows = await db.query(getIdQuery, [email, password]);
+    const userId = userIdRows[0]?.id;
+
+    if (!userId) {
+      return res.status(404).send("User not found");
+    }
+
+    // Insert into todos
+    const insertTodoQuery = "INSERT INTO todos (name, user) VALUES (?, ?)";
+    await db.query(insertTodoQuery, [name, userId]);
+
+    res.status(200).send("Todo added successfully");
+  } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
-}
+  }
 });
 
 server.post("/todos", (req, res) => {
