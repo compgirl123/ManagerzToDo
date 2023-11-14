@@ -17,9 +17,9 @@ server.use(cors());
 
 server.post("/add", (req, res) => {
   try {
-    const { name, category } = req.body;
-    const sql = "INSERT INTO todos (name, category) VALUES (?,?)";
-    const result = db.query(sql, [name, category]);
+    const { name } = req.body;
+    const sql = "INSERT INTO todos (name) VALUES (?)";
+    const result = db.query(sql, [name]);
     console.log(result);
     res.status(200).send("Game added successfully");
 } catch (error) {
