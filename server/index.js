@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
-const mysql = require('mysql');
 const cors = require('cors');
+const mysql = require('mysql2/promise');
 require('dotenv').config({ path: '../.env' })
 
 const db = mysql.createPool({
@@ -15,24 +15,32 @@ const db = mysql.createPool({
 server.use(express.json());
 server.use(cors());
 
-server.post("/add", async (req, res) => {
+server.post("/add", (req, res) => {
   try {
     const { name, email, password } = req.body;
-
     // Retrieve user id
     const getIdQuery = "SELECT id FROM users WHERE email = ? AND password = ?";
-    const userIdRows = await db.query(getIdQuery, [email, password]);
-    const userId = userIdRows[0]?.id;
+    pool.query(getIdQuery, [email, password])
+      .then(([userIdRows]) => {
+        const userId = userIdRows[0]?.id;
 
-    if (!userId) {
-      return res.status(404).send("User not found");
-    }
+        if (!userId) {
+          return res.status(404).send("User not found");
+        }
 
-    // Insert into todos
-    const insertTodoQuery = "INSERT INTO todos (name, user) VALUES (?, ?)";
-    await db.query(insertTodoQuery, [name, userId]);
-
-    res.status(200).send("Todo added successfully");
+        // Insert into todos
+        const insertTodoQuery = "INSERT INTO todos (name, user) VALUES (?, ?)";
+        return pool.query(insertTodoQuery, [name, userId]);
+      })
+      .then(() => {
+        pool.end(); // Close the connection pool
+        res.status(200).send("Todo added successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+        pool.end(); // Close the connection pool in case of an error
+        res.status(500).send("Internal server error");
+      });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
