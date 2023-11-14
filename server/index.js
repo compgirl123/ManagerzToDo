@@ -21,7 +21,7 @@ server.post("/add", (req, res) => {
     const getId = "SELECT id FROM users WHERE email = ? AND password = ?";
     const userId = db.query(getId, [email,password]);
     const sql = "INSERT INTO todos (name,user) VALUES (?,?)";
-    const result = db.query(sql, [name]);
+    const result = db.query(sql, [name,userId]);
     console.log(result);
     res.status(200).send("Game added successfully");
 } catch (error) {
