@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 const cors = require('cors');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql');
 require('dotenv').config({ path: '../.env' })
 
 const db = mysql.createPool({
@@ -16,35 +16,35 @@ server.use(express.json());
 server.use(cors());
 
 server.post("/add", (req, res) => {
-  try {
+
     const { name, email, password } = req.body;
-    // Retrieve user id
-    const getIdQuery = "SELECT id FROM users WHERE email = ? AND password = ?";
-    pool.query(getIdQuery, [email, password])
-      .then(([userIdRows]) => {
-        const userId = userIdRows[0]?.id;
-
-        if (!userId) {
-          return res.status(404).send("User not found");
-        }
-
-        // Insert into todos
-        const insertTodoQuery = "INSERT INTO todos (name, user) VALUES (?, ?)";
-        return pool.query(insertTodoQuery, [name, userId]);
-      })
-      .then(() => {
-        pool.end(); // Close the connection pool
-        res.status(200).send("Todo added successfully");
-      })
-      .catch((error) => {
-        console.error(error);
-        pool.end(); // Close the connection pool in case of an error
-        res.status(500).send("Internal server error");
-      });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
+   // Step 1: Retrieve user ID
+// Step 1: Retrieve user ID
+const getUserIdQuery = 'SELECT id FROM users WHERE email = ? AND password = ?';
+db.query(getUserIdQuery, [email, password], (err, userIdResult) => {
+  if (err) {
+    console.error('Error retrieving user ID:', err);
+    return;
   }
+
+  if (userIdResult.length > 0) {
+    const userId = userIdResult[0].id;
+
+    // Step 2: Insert into todos with user ID
+    const insertTodoQuery = 'INSERT INTO todos (name, user) VALUES (?, ?)';
+    db.query(insertTodoQuery, [name, userId], (err) => {
+      if (err) {
+        console.error('Error adding todo:', err);
+        return;
+      }
+
+      console.log('Todo added successfully');
+    });
+  } else {
+    console.log('User not found');
+  }
+});
+
 });
 
 server.post("/todos", (req, res) => {
@@ -91,22 +91,6 @@ server.post("/signup", (req, res) => {
     res.status(500).send("Internal server error");
 }
 });
-
-/*server.put("/edit", (req, res) => {
-    const { id } = req.body;
-    const { name } = req.body;
-    const { category } = req.body;
-
-    let sql = "UPDATE todos SET name = ?, category = ? WHERE id = ?";
-    db.query(sql, [name, category, id], (err,result) =>{
-        if (err) {
-            console.log(err);
-        }else{
-
-            res.send(result);
-        }
-    })
-});*/
 
 server.delete("/delete/:index", (req,res) =>{
     const { index } = req.params
