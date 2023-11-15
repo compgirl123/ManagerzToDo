@@ -18,6 +18,8 @@ server.use(cors());
 server.post("/add", (req, res) => {
 
 const { id, name, email, password } = req.body;
+console.log("monkey");
+console.log(id);
 // Step 1: Retrieve user ID
 
 const insertTodoQuery = 'INSERT INTO todos (name, user) VALUES (?, ?)';

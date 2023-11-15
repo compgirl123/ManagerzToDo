@@ -38,27 +38,31 @@ const Dashboard = ({ setIsAuthenticated }) => {
     });
   };
 
-  const handleClickButton = () => {
+  const handleClickButton = async () => {
     console.log(values.name.trim());
     if (values.name.trim()) {
-      Axios.post(`${baseUrl}/add`, {
-        name: values.name,
-        id: userCredentials.id,
-        email: userCredentials.email,
-        password: userCredentials.password,
-      })
-        .then(() => {
-          fetchTasks();
-          console.log(tasks);
-          setValues(prevValues => ({ ...prevValues, name: '' }));
-          setWarning('');
-        })
-        .catch((error) => {
-          console.log("HERRR");
-          console.error('Network error:', error);
+      alert("HEYYY");
+
+      try {
+        await Axios.post(`${baseUrl}/add`, {
+          name: values.name,
+          id: userCredentials.id,
+          email: userCredentials.email,
+          password: userCredentials.password,
         });
+
+        // Assuming fetchTasks returns a promise or is asynchronous
+        await fetchTasks();
+
+        console.log(tasks);
+        setValues((prevValues) => ({ ...prevValues, name: "" }));
+        setWarning("");
+      } catch (error) {
+        console.log("HERRR");
+        console.error("Network error:", error);
+      }
     } else {
-      setWarning('Input box must not be empty');
+      setWarning("Input box must not be empty");
     }
   };
 
