@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
-  const { userCredentials } = location.state || {};
+  const { userData } = location.state || {};
   const [values, setValues] = useState({ name: '' });
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState('');
@@ -15,13 +15,14 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchTasks();
-    console.log(tasks);
+    console.log("YPYOYO");
+    console.log(userData);
   }, []);
 
   const fetchTasks = () => {
     Axios.post(`${baseUrl}/todos`, {
-      email: userCredentials.email,
-      password: userCredentials.password,
+      email: userData.email,
+      password: userData.password,
     })
       .then((response) => {
         setTasks(response.data);
@@ -39,16 +40,15 @@ const Dashboard = ({ setIsAuthenticated }) => {
   };
 
   const handleClickButton = async () => {
-    console.log(values.name.trim());
     if (values.name.trim()) {
       alert("HEYYY");
 
       try {
         await Axios.post(`${baseUrl}/add`, {
           name: values.name,
-          id: userCredentials.id,
-          email: userCredentials.email,
-          password: userCredentials.password,
+          id: userData.id,
+          email: userData.email,
+          password: userData.password,
         });
 
         // Assuming fetchTasks returns a promise or is asynchronous

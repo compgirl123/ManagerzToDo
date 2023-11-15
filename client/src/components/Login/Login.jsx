@@ -7,7 +7,7 @@ import "./Login.scss";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userCredentials, setUserCredentials] = useState({ email: '', password: '' });
+  const [user, setUser] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -20,6 +20,10 @@ const Login = () => {
     }).then((response) => {
       console.log("DANNY");
       console.log(response);
+      const userData = response.data.user;
+      console.log('User Data:', userData);
+      setUser(response);
+
     Swal.fire({
         timer: 500,
         showConfirmButton: false,
@@ -28,14 +32,14 @@ const Login = () => {
         },
         willClose: () => {
           localStorage.setItem('is_authenticated', true);
-          setUserCredentials(response);
+          console.log(user);
           //setIsAuthenticated(true);
           Swal.fire({
             icon: 'success',
             title: 'Successfully logged in!',
             showConfirmButton: false
           });
-          navigate("/dashboard", { state: { userCredentials } });
+          navigate("/dashboard", { state: { userData } });
         },
       });
     }).catch((error) => {
