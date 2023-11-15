@@ -17,31 +17,18 @@ server.use(cors());
 
 server.post("/add", (req, res) => {
 
-const { name, email, password } = req.body;
+const { id, name, email, password } = req.body;
 // Step 1: Retrieve user ID
-// Step 1: Retrieve user ID
-const getUserIdQuery = 'SELECT id FROM users WHERE email = ? AND password = ?';
-db.query(getUserIdQuery, [email, password], (err, userIdResult) => {
+
+const insertTodoQuery = 'INSERT INTO todos (name, user) VALUES (?, ?)';
+db.query(insertTodoQuery, [name, id], (err) => {
   if (err) {
-    console.error('Error retrieving user ID:', err);
+    console.error('Error adding todo:', err);
+    res.status(500).send('Internal Server Error');
     return;
   }
-
-  if (userIdResult.length > 0) {
-    const userId = userIdResult[0].id;
-
-    // Step 2: Insert into todos with user ID
-    const insertTodoQuery = 'INSERT INTO todos (name, user) VALUES (?, ?)';
-    db.query(insertTodoQuery, [name, userId], (err) => {
-      if (err) {
-        console.error('Error adding todo:', err);
-        return;
-      }
-      console.log('Todo added successfully');
-    });
-  } else {
-    console.log('User not found');
-  }
+  console.log('Todo added successfully');
+  res.status(200).send('Todo added successfully');
 });
 
 });

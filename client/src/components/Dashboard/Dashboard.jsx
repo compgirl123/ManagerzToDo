@@ -15,6 +15,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchTasks();
+    console.log(tasks);
   }, []);
 
   const fetchTasks = () => {
@@ -38,18 +39,22 @@ const Dashboard = ({ setIsAuthenticated }) => {
   };
 
   const handleClickButton = () => {
+    console.log(values.name.trim());
     if (values.name.trim()) {
       Axios.post(`${baseUrl}/add`, {
         name: values.name,
+        id: userCredentials.id,
         email: userCredentials.email,
         password: userCredentials.password,
       })
         .then(() => {
           fetchTasks();
+          console.log(tasks);
           setValues(prevValues => ({ ...prevValues, name: '' }));
           setWarning('');
         })
         .catch((error) => {
+          console.log("HERRR");
           console.error('Network error:', error);
         });
     } else {

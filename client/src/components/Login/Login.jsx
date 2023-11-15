@@ -13,11 +13,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const userCredentials = { email, password };
-    setUserCredentials(userCredentials);
+    //setUserCredentials(userCredentials);
     Axios.post(`https://managerztododb.onrender.com/login`, {
        email: userCredentials.email,
        password: userCredentials.password
     }).then((response) => {
+      console.log("DANNY");
+      console.log(response);
     Swal.fire({
         timer: 500,
         showConfirmButton: false,
@@ -26,6 +28,7 @@ const Login = () => {
         },
         willClose: () => {
           localStorage.setItem('is_authenticated', true);
+          setUserCredentials(response);
           //setIsAuthenticated(true);
           Swal.fire({
             icon: 'success',
