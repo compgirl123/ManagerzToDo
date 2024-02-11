@@ -15,7 +15,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchTasks();
-    console.log("YPYOYO");
     console.log(userData);
   }, []);
 
@@ -41,8 +40,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleClickButton = async () => {
     if (values.name.trim()) {
-      alert("HEYYY");
-
       try {
         await Axios.post(`${baseUrl}/add`, {
           name: values.name,
@@ -51,14 +48,12 @@ const Dashboard = ({ setIsAuthenticated }) => {
           password: userData.password,
         });
 
-        // Assuming fetchTasks returns a promise or is asynchronous
         await fetchTasks();
 
         console.log(tasks);
         setValues((prevValues) => ({ ...prevValues, name: "" }));
         setWarning("");
       } catch (error) {
-        console.log("HERRR");
         console.error("Network error:", error);
       }
     } else {
