@@ -13,7 +13,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const userCredentials = { email, password };
-    //setUserCredentials(userCredentials);
     Axios.post(`https://managerztododb.onrender.com/login`, {
        email: userCredentials.email,
        password: userCredentials.password
@@ -67,6 +66,8 @@ const Login = () => {
   return (
     <div className="full-screen">
       <div className="small-container">
+      <h3 className="note">Note: A free tier is being used for the database. A delay of a couple of minutes at the start is expected, please be patient. </h3>
+      <br/>
       <h1 className="title-login">Admin Login</h1>
         <form onSubmit={handleLogin} className="form">
           <div className="input-group">
