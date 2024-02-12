@@ -4,6 +4,8 @@ import Card from '../Card/Card';
 import Header from './Header';
 import './Dashboard.scss';
 import { useLocation } from 'react-router-dom';
+import Filters from './Filters';
+import Categories from '../Jsons/categories.json';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
@@ -12,10 +14,13 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState('');
   const baseUrl = 'https://managerztododb.onrender.com';
+  // Extract category names from the JSON array
+  const categoryNames = Categories.map(category => category.category);
 
   useEffect(() => {
     fetchTasks();
     console.log(userData);
+    console.log(Categories);
   }, []);
 
   const fetchTasks = () => {
@@ -74,10 +79,21 @@ const Dashboard = ({ setIsAuthenticated }) => {
             value={values.name}
             onChange={handleChangeValues}
           />
+
           <button className="register-button" onClick={handleClickButton}>
             Add
           </button>
         </div>
+        <div className="filtersDiv">
+          <Filters
+            /*selectedOption={'test1'}*/
+            /*handleOptionChange={handleCategoryChange}*/
+            options={categoryNames}
+            defaultLabel="Choose Task Category"
+            className="filtersDiv"
+         />
+
+          </div>
         <br />
         <div className="cards">
           <p style={{ color: 'red', paddingBottom: '10px' }}>{warning}</p>
