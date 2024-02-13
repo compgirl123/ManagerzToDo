@@ -1,19 +1,21 @@
 import React from 'react';
-import "./Filters.scss";
 
-const Filters = ({ selectedOption, handleOptionChange, options, defaultLabel }) => {
-    return (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '5px 0', padding: '10px' }}>
-            <select
-                value={selectedOption}
-                onChange={handleOptionChange}
-                className = "filters"
-                >
-                <option value=''>{defaultLabel}</option>
-                {options.map((option, index) => <option key={index} value={option}>{option}</option>)}
-            </select>
-        </div>
-    );
+const Filters = ({ options, defaultLabel, className, handleOptionChange }) => {
+  const handleChange = (e) => {
+    const selectedCategory = e.target.value;
+    handleOptionChange(selectedCategory);
+  };
+
+  return (
+    <div className={className}>
+      <select defaultValue="" onChange={handleChange}>
+        <option value="" disabled>{defaultLabel}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>{option}</option>
+        ))}
+      </select>
+    </div>
+  );
 };
 
 export default Filters;

@@ -17,13 +17,14 @@ server.use(cors());
 
 server.post("/add", (req, res) => {
 
-const { id, name, email, password } = req.body;
+console.log(req.body);
+const { id, name, category } = req.body;
 console.log("monkey");
+console.log(category);
 console.log(id);
-// Step 1: Retrieve user ID
 
-const insertTodoQuery = 'INSERT INTO todos (name, user) VALUES (?, ?)';
-db.query(insertTodoQuery, [name, id], (err) => {
+const insertTodoQuery = 'INSERT INTO todos (name, category, user) VALUES (?, ?, ?)';
+db.query(insertTodoQuery, [name, category, id], (err) => {
   if (err) {
     console.error('Error adding todo:', err);
     res.status(500).send('Internal Server Error');
@@ -69,7 +70,6 @@ server.post("/login", (req, res) => {
 server.post("/signup", (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log("BANANAS");
     const sql = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
     const result = db.query(sql, [name, email, password]);
     console.log(result);

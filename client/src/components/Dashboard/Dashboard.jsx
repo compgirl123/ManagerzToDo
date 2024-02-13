@@ -11,16 +11,14 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const location = useLocation();
   const { userData } = location.state || {};
   const [values, setValues] = useState({ name: '' });
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [tasks, setTasks] = useState([]);
   const [warning, setWarning] = useState('');
   const baseUrl = 'https://managerztododb.onrender.com';
-  // Extract category names from the JSON array
   const categoryNames = Categories.map(category => category.category);
 
   useEffect(() => {
     fetchTasks();
-    console.log(userData);
-    console.log(Categories);
   }, []);
 
   const fetchTasks = () => {
@@ -43,19 +41,26 @@ const Dashboard = ({ setIsAuthenticated }) => {
     });
   };
 
+  const handleCategoryChange = (category) => {
+    console.log(category);
+    setSelectedCategory(category);
+  };
+
   const handleClickButton = async () => {
     if (values.name.trim()) {
+      console.log(selectedCategory);
       try {
         await Axios.post(`${baseUrl}/add`, {
           name: values.name,
+          category: selectedCategory,
           id: userData.id,
           email: userData.email,
           password: userData.password,
         });
+        console.log(selectedCategory);
 
         await fetchTasks();
 
-        console.log(tasks);
         setValues((prevValues) => ({ ...prevValues, name: "" }));
         setWarning("");
       } catch (error) {
@@ -79,21 +84,16 @@ const Dashboard = ({ setIsAuthenticated }) => {
             value={values.name}
             onChange={handleChangeValues}
           />
-
+          <Filters
+            options={categoryNames}
+            defaultLabel="Choose Task Category"
+            className="filtersDiv"
+            handleOptionChange={handleCategoryChange}
+          />
           <button className="register-button" onClick={handleClickButton}>
             Add
           </button>
         </div>
-        <div className="filtersDiv">
-          <Filters
-            /*selectedOption={'test1'}*/
-            /*handleOptionChange={handleCategoryChange}*/
-            options={categoryNames}
-            defaultLabel="Choose Task Category"
-            className="filtersDiv"
-         />
-
-          </div>
         <br />
         <div className="cards">
           <p style={{ color: 'red', paddingBottom: '10px' }}>{warning}</p>
