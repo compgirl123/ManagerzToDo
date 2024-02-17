@@ -1,6 +1,17 @@
 .filtersDiv {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  padding: 10px;
+  font-size: 1rem;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 25vw;
+}
+
+.filtersDiv select {
+  font-size: 1rem;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 100%;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Filters.scss";
 
 const Filters = ({ options, defaultLabel, className, handleOptionChange }) => {
   const handleChange = (e) => {
@@ -8,7 +9,7 @@ const Filters = ({ options, defaultLabel, className, handleOptionChange }) => {
 
   return (
     <div className={className}>
-      <select defaultValue="" onChange={handleChange}>
+      <select defaultValue ="" className="filtersDiv" onChange={handleChange}>
         <option value="" disabled>{defaultLabel}</option>
         {options.map((option, index) => (
           <option key={index} value={option}>{option}</option>

@@ -75,6 +75,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
     <div className="app">
       <div className="container">
         <Header setIsAuthenticated={setIsAuthenticated} />
+          <h1 className="managerHeader">Manager's To Do's</h1>
+          <br/>
         <div className="register-box">
           <input
             className="register-input"
@@ -87,7 +89,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
           <Filters
             options={categoryNames}
             defaultLabel="Choose Task Category"
-            className="filtersDiv"
+            className="register-input"
             handleOptionChange={handleCategoryChange}
           />
           <button className="register-button" onClick={handleClickButton}>
@@ -104,7 +106,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
               name={task.name}
               category={task.category}
               onDeleteTask={fetchTasks}
-              // onEditTask =
             />
           ))}
         </div>
