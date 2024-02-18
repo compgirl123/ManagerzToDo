@@ -1,15 +1,25 @@
-.managerHeader{
-  color:white;
-  text-align:center;
-  padding-top: 50px;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#551A8B;
+  padding: 10px;
 }
 
-.logout{
-  display:flex;
-  justify-content: center;
+.userLoggedIn {
+  color: white;
 }
 
-header {
-  background-color: #551A8B;
+.logout {
+  margin-top: 30px;
+  margin-bottom: 18px;
 }
 
+.muted-button {
+  color: white;
+  background-color: darkorchid;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+}

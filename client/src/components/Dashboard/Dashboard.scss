@@ -44,7 +44,7 @@
   padding-top: 50px;
 }
 
-.logout{
-  display:flex;
-  justify-content: center;
+.logout {
+  display: flex;
+  justify-content: flex-end; /* Change from 'center' to 'flex-end' */
 }

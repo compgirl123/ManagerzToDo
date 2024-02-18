@@ -19,6 +19,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchTasks();
+   console.log(userData);
   }, []);
 
   const fetchTasks = () => {
@@ -73,8 +74,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className="app">
-      <div className="container">
-        <Header setIsAuthenticated={setIsAuthenticated} />
+        <Header setIsAuthenticated={setIsAuthenticated} userData={userData} />
           <h1 className="managerHeader">Manager's To Do's</h1>
           <br/>
         <div className="register-box">
@@ -110,7 +110,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
 
