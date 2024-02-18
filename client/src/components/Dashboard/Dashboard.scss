@@ -1,54 +1,83 @@
-
-.app{
-  height:100vh;
-  width:100%;
+.app {
+  height: 100vh;
+  width: 100%;
 }
 
-.cards{
-  color:white;
+.cards {
+  color: white;
   width: 50vw;
   text-align: center;
   display: table;
   margin-right: auto;
   margin-left: auto;
-  min-width:300px;
+  min-width: 300px;
 }
 
-.register-box{
+.register-box {
   display: flex;
   justify-content: center;
+  width: 50vw;
+  margin-right: auto;
+  margin-left: auto;
+
+  input, .register-input, select {
+    font-size: 1rem;
+    padding-left: 0.5em;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    width: 90%; /* Set width for both input and dropdown */
+    max-width: 90%; /* Ensure it doesn't overflow parent container */
+  }
 }
 
-.register-box input{
-  font-size: 1rem;
-  padding: 0.5em;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  width: 25vw;
-}
-
-.register-button{
-  color:white;
-  background-color: #551A8B;
+.register-box .register-button {
+  color: white;
+  background-color: #551a8b;
   padding: 0.5em 1em;
   font-size: 1rem;
   border: none;
   border-radius: 10px;
   padding: 10px;
+  width: 10vw;
 }
 
-.managerHeader{
-  color:white;
-  text-align:center;
+.managerHeader {
+  color: white;
+  text-align: center;
   padding-top: 50px;
 }
 
 .logout {
   display: flex;
-  justify-content: flex-end; /* Change from 'center' to 'flex-end' */
+  justify-content: flex-end;
 }
 
-.register-input, .register-button{
-  margin:5px;
+.register-input, .register-button {
+  margin: 5px;
 }
+
+/* Tablets and Mobile Phones*/
+@media only screen and (max-width: 768px) {
+  .cards {
+    width: 80vw;
+  }
+  .register-box {
+    width: 80vw;
+    height: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .register-box .register-button {
+    width: 20vw;
+  }
+  .register-input {
+    flex: 0 0 100%;
+    margin-bottom: 10px;
+  }
+  .filtersDiv {
+    flex: 0 0 100%;
+  }
+}
+
+
