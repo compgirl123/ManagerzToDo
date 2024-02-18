@@ -28,7 +28,12 @@
     color: white;
 }
 
-.delete{
-    background-color: darkorchid;
-    color: white;
+.delete {
+  background-color: darkorchid; /* Default color is darkorchid */
+  color: white;
+}
+
+.category{
+  background-color: var(--button-color, darkorchid); /* Default color is darkorchid */
+  color: white;
 }

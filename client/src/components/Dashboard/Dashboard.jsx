@@ -35,6 +35,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
       });
   };
 
+  const getColorByCategory = (selectedCategory) => {
+    const category = Categories.find(cat => cat.category === selectedCategory);
+    return category ? category.color : null;
+  };
+
   const handleChangeValues = (e) => {
     setValues({
       ...values,
@@ -44,6 +49,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleCategoryChange = (category) => {
     console.log(category);
+    console.log(getColorByCategory(category));
     setSelectedCategory(category);
   };
 
@@ -74,9 +80,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className="app">
-        <Header setIsAuthenticated={setIsAuthenticated} userData={userData} />
-          <h1 className="managerHeader">Manager's To Do's</h1>
-          <br/>
+      <Header setIsAuthenticated={setIsAuthenticated} userData={userData} />
+        <h1 className="managerHeader">Manager's To Do's</h1>
+        <br/>
         <div className="register-box">
           <input
             className="register-input"
@@ -96,20 +102,21 @@ const Dashboard = ({ setIsAuthenticated }) => {
             Add
           </button>
         </div>
-        <br />
-        <div className="cards">
-          <p style={{ color: 'red', paddingBottom: '10px' }}>{warning}</p>
-          {tasks.map((task) => (
-            <Card
-              key={task.id}
-              id={task.id}
-              name={task.name}
-              category={task.category}
-              onDeleteTask={fetchTasks}
-            />
-          ))}
-        </div>
-      </div>
+      <br />
+      <div className="cards">
+        <p style={{ color: 'red', paddingBottom: '10px' }}>{warning}</p>
+        {tasks.map((task) => (
+          <Card
+            key={task.id}
+            id={task.id}
+            name={task.name}
+            category={task.category}
+            onDeleteTask={fetchTasks}
+            color = {getColorByCategory(task.category)}
+          />
+        ))}
+    </div>
+  </div>
   );
 };
 

@@ -30,7 +30,7 @@
 
 .register-button{
   color:white;
-  background-color: darkorchid;
+  background-color: #551A8B;
   padding: 0.5em 1em;
   font-size: 1rem;
   border: none;
@@ -47,4 +47,8 @@
 .logout {
   display: flex;
   justify-content: flex-end; /* Change from 'center' to 'flex-end' */
+}
+
+.register-input, .register-button{
+  margin:5px;
 }

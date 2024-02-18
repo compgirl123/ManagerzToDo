@@ -1,12 +1,12 @@
 [
-  { "category": "Work/Professional" },
-  { "category": "Personal" },
-  { "category": "Health and Fitness" },
-  { "category": "Home and Household" },
-  { "category": "Social" },
-  { "category": "Financial" },
-  { "category": "Education/Learning" },
-  { "category": "Travel" },
-  { "category": "Projects" },
-  { "category": "Routine Maintenance" }
+  { "category": "Work/Professional", "color":"red" },
+  { "category": "Personal", "color": "green" },
+  { "category": "Health and Fitness", "color": "yellow" },
+  { "category": "Home and Household", "color":"black" },
+  { "category": "Social", "color":"blue" },
+  { "category": "Financial", "color": "teal" },
+  { "category": "Education/Learning", "color": "brown" },
+  { "category": "Travel", "color": "aliceblue"},
+  { "category": "Projects", "color": "orangered" },
+  { "category": "Routine Maintenance", "color": "tomato" }
 ]

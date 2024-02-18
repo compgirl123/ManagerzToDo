@@ -6,7 +6,7 @@ const Header = ({ userData, setIsAuthenticated }) => {
   return (
     <header>
       <div className="header-content">
-        <h1 className="userLoggedIn">Welcome {userData.name}</h1>
+        <h2 className="userLoggedIn">Welcome {userData.name}</h2>
         <Logout setIsAuthenticated={setIsAuthenticated} />
       </div>
     </header>
